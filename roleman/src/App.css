@@ -1,38 +1,78 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  background-color: #330a0a; /* ciemny bordowy pomieszany z czarnym */
+  color: white;
+  text-align: left; /* Tekst wyrównany do lewej */
+  height: 100vh; /* Pełna wysokość widoku */
+  display: flex;
+  flex-direction: column;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  font-size: calc(80px + 8vmin); /* Zwiększ font, dostosuj według potrzeb */
+  color: black;
+  padding: 50px; /* Dodaj padding dla wyglądu */
+  align-self: flex-start;
+}
+
+.account-header {
+  background-color: #330a0a;  
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  vertical-align: top;
+  justify-content: flex-end; /* Wyrównaj do prawej strony */
+  padding: 10px; /* Dodaj trochę paddingu dookoła */
+}
+
+.account-header > * {
+  margin-left: 10px;
+}
+
+.account-button {
+  padding: 10px 20px; /* Dodaj trochę paddingu */
+  background-color: #330a0a; /* Kolor tła, dostosuj do koloru strony */
+  color: white; /* Kolor tekstu */
+  border: black; /* Usuń obramowanie */
+  cursor: pointer; /* Kursor wskazujący */
+}
+
+.account-button a {
+  color: inherit;
+  text-decoration: none;
+  display: block; /* Rozciągnij link na całą dostępną szerokość */
+}
+
+.dropdown-toggle, .btn-primary  {
+  background-color: white; /* Kolor tła */
+  color: #5c0a0a; /* Kolor tekstu, dostosuj do swojego wyglądu */
+  border: 1px solid #5c0a0a; /* Dodaj obramowanie jeśli potrzebujesz */
+}
+
+.dropdown-toggle:hover,.btn-primary:hover {
+  background-color: black;
+  color: #5c0a0a;
+  border: 2px solid black; 
+}
+
+.dropdown-toggle:active, .btn-primary:active {
+  background-color: black; 
+  color: #5c0a0a;
+}
+
+.form-container {
+  position: fixed; /* Stała pozycja */
+  top: 50%; /* Centrowanie w pionie */
+  left: 50%; /* Centrowanie w poziomie */
+  transform: translate(-50%, -50%); /* Ajustowanie pozycji centrowania */
+  background-color: #5c0a0a; /* Kolor tła dla formularza */
+  padding: 20px; /* Padding wewnątrz formularza */
+  border: 2px solid black; 
+}
+
+.btn-primary:hover {
+  border: 2px solid black; /* Niebieska obramówka */
+}
+
+.btn-primary:active {
+  background-color: black; /* Niebieskie tło */
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
