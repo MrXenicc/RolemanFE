@@ -6,7 +6,7 @@ import LoginForm from './components/Loginform';
 import RegisterForm from './components/RegisterForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-'komentasz'
+'komentarz'
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
