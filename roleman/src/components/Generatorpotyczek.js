@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import './Generatorpotyczek.css';
 
 const EncounterGeneratorDropdown = () => {
   const [teamSize, setTeamSize] = useState('');

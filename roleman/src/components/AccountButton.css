@@ -1,0 +1,30 @@
+/* AccountButton.css */
+
+/* Styl dla głównego przycisku Dropdown */
+.account-button-dropdown {
+    background-color: #330a0a; /* Kolor tła przycisku */
+    color: white; /* Kolor tekstu na przycisku */
+    border: none; /* Brak obramowania */
+    cursor: pointer; /* Kursor wskazujący */
+    padding: 10px 20px; /* Wewnętrzny odstęp */
+  }
+  
+  /* Styl dla elementów w rozwijanym menu */
+  .account-button-dropdown-menu {
+    background-color: #4a1523; /* Kolor tła menu */
+    border: none; /* Brak obramowania */
+    /* Możesz dodać inne style dotyczące menu, np. padding, shadow itp. */
+  }
+  
+  /* Styl dla poszczególnych elementów w menu */
+  .account-button-dropdown-item {
+    color: white; /* Kolor tekstu elementów */
+    padding: 10px; /* Wewnętrzny odstęp dla elementów */
+    /* Dodaj inne style, np. hover effects itp. */
+  }
+  
+  .account-button-dropdown-item:hover {
+    background-color: #561f37; /* Kolor tła elementu przy najechaniu */
+  }
+  
+  

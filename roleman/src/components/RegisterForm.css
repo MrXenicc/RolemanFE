@@ -1,0 +1,45 @@
+/* RegisterForm.css */
+
+/* Główny kontener formularza */
+.register-form-container {
+    background-color: #fff; /* Kolor tła formularza */
+    padding: 20px; /* Wewnętrzny odstęp */
+    border-radius: 8px; /* Zaokrąglone rogi */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Cień */
+    width: 100%; /* Szerokość */
+    max-width: 400px; /* Maksymalna szerokość */
+    margin: auto; /* Wyśrodkowanie */
+  }
+  
+  /* Style dla pól tekstowych */
+  .register-form-input {
+    width: 100%; /* Szerokość na całą dostępną przestrzeń */
+    padding: 10px; /* Wewnętrzny odstęp */
+    margin-bottom: 15px; /* Odstęp od dolnego elementu */
+    border: 1px solid #ddd; /* Obramowanie */
+    border-radius: 4px; /* Zaokrąglone rogi */
+  }
+  
+  /* Styl dla przycisku rejestracji */
+  .register-form-button {
+    width: 100%; /* Szerokość na całą dostępną przestrzeń */
+    padding: 10px 20px; /* Wewnętrzny odstęp */
+    background-color: #330a0a; /* Kolor tła */
+    color: white; /* Kolor tekstu */
+    border: none; /* Brak obramowania */
+    border-radius: 4px; /* Zaokrąglone rogi */
+    cursor: pointer; /* Kursor wskazujący */
+  }
+  
+  .register-form-button:hover {
+    background-color: #561f37; /* Kolor tła przy najechaniu */
+  }
+  
+  /* Style dla linków lub dodatkowych opcji */
+  .register-form-link {
+    color: #330a0a; /* Kolor tekstu linków */
+    text-decoration: none; /* Brak podkreślenia */
+    display: block; /* Wyświetlanie jako blok */
+    margin-top: 10px; /* Odstęp od góry */
+  }
+  

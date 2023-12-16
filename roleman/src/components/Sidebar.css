@@ -1,0 +1,15 @@
+.sidebar {
+    position: fixed; /* Fixed position */
+    right: 0; /* Przyczepiony do prawej strony */
+    top: 0; /* Od samej góry strony */
+    width: 250px; /* Szerokość paska bocznego */
+    height: 100%; /* Pełna wysokość */
+    background: rgba(0, 0, 0, 0.5); /* Półprzezroczyste tło */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Cień dla wyodrębnienia */
+    z-index: 1000; /* Upewnij się, że pasek boczny znajduje się nad pozostałymi elementami */
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px; /* Dodaj trochę przestrzeni od góry */
+    /* Dodaj inne style według potrzeb */
+  }
+  

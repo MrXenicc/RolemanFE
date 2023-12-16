@@ -1,0 +1,29 @@
+/* CharacterCardDropdown.css */
+
+/* Styl dla głównego przycisku Dropdown */
+.character-card-dropdown {
+    background-color: #330a0a; /* Kolor tła przycisku */
+    color: white; /* Kolor tekstu */
+    border: none; /* Brak obramowania */
+    cursor: pointer; /* Kursor wskazujący */
+    padding: 10px 20px; /* Wewnętrzny odstęp */
+  }
+  
+  /* Styl dla rozwijanego menu */
+  .character-card-dropdown-menu {
+    background-color: #4a1523; /* Kolor tła menu */
+    border: none; /* Brak obramowania */
+    /* Dodatkowe style dla menu, np. cień, padding itp. */
+  }
+  
+  /* Styl dla poszczególnych elementów w menu */
+  .character-card-dropdown-item {
+    color: white; /* Kolor tekstu elementów */
+    padding: 10px; /* Wewnętrzny odstęp dla elementów */
+    /* Dodaj inne style, np. hover effects itp. */
+  }
+  
+  .character-card-dropdown-item:hover {
+    background-color: #561f37; /* Kolor tła elementu przy najechaniu */
+  }
+  

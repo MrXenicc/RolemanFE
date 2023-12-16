@@ -1,0 +1,44 @@
+/* EncounterGeneratorDropdown.css */
+
+/* Styl dla głównego przycisku Dropdown */
+.encounter-generator-dropdown {
+    background-color: #330a0a; /* Kolor tła przycisku */
+    color: white; /* Kolor tekstu */
+    border: none; /* Brak obramowania */
+    cursor: pointer; /* Kursor wskazujący */
+    padding: 10px 20px; /* Wewnętrzny odstęp */
+  }
+  
+  /* Styl dla rozwijanego menu */
+  .encounter-generator-dropdown-menu {
+    background-color: #4a1523; /* Kolor tła menu */
+    border: none; /* Brak obramowania */
+    /* Możesz dodać inne style, np. cień, padding itp. */
+  }
+  
+  /* Styl dla formularza wewnątrz menu */
+  .encounter-generator-form {
+    padding: 15px; /* Wewnętrzny odstęp formularza */
+    /* Dodaj inne potrzebne style dla formularza */
+  }
+  
+  /* Styl dla poszczególnych elementów formularza */
+  .encounter-generator-form-group {
+    margin-bottom: 10px; /* Odstęp pomiędzy grupami formularza */
+    /* Dodaj inne style dla grupy elementów formularza */
+  }
+  
+  /* Styl dla przycisku 'Generuj' */
+  .encounter-generator-submit-btn {
+    background-color: #561f37; /* Kolor tła przycisku */
+    color: white; /* Kolor tekstu */
+    border: none; /* Brak obramowania */
+    padding: 10px 20px; /* Wewnętrzny odstęp */
+    width: 100%; /* Szerokość na całą dostępną przestrzeń */
+    cursor: pointer; /* Kursor wskazujący */
+  }
+  
+  .encounter-generator-submit-btn:hover {
+    background-color: #702f4b; /* Kolor tła przy najechaniu */
+  }
+  
