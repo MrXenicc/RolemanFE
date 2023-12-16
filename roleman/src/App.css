@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: url('C:\RolemanFE\roleman\public\tło.jpg'); /* Ścieżka do obrazu w folderze public */
+  background-image: url('C:\RolemanFE\roleman\public\tło1.png'); /* Ścieżka do obrazu w folderze public */
   background-size: cover; /* Pokryj cały dostępny obszar */
   background-position: center; /* Wyśrodkuj obraz */
   background-repeat: no-repeat; /* Nie powtarzaj obrazu */
@@ -9,6 +9,9 @@
   text-align: left; /* Tekst wyrównany do lewej */
   display: flex;
   flex-direction: column;
+  /*background:linear-gradient(rgba(250,0,0,0.5),transparent);
+  background-color:black */
+  /*background-image: linear-gradient(to top, #000000, #640000);*/
 }
 
 .App-header {
@@ -19,7 +22,7 @@
 }
 
 .account-header {
-  background-image: url('C:\RolemanFE\roleman\public\tło.jpg'); /* Ścieżka do obrazu w folderze public */
+  /*background-image: url('C:\RolemanFE\roleman\public\tło.jpg'); /* Ścieżka do obrazu w folderze public */
   background-size: cover;  
   display: flex;
   vertical-align: top;

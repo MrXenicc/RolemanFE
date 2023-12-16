@@ -31,7 +31,7 @@ const App = () => {
       {showLogin && <LoginForm onClose={() => setShowLogin(false)} />}
       {showRegister && <RegisterForm onClose={() => setShowRegister(false)} />}
       <header className="App-header">
-        <h1 style={{ fontSize: 80 }}> Roleman! </h1>
+        <img src="/Logo1.png" alt="Roleman Logo" style={{ width: '200px', height: 'auto' }} />
       </header>
     </div>
   );
