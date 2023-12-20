@@ -2,26 +2,47 @@ import React, { useState } from 'react';
 import './Loginform.css'
 
 const LoginForm = ({ onClose }) => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Tutaj możesz obsłużyć logowanie, np. wywołać API
-    console.log(email, password);
-    onClose(); // Zamknij formularz po zalogowaniu (opcjonalnie)
+  
+    // Dane do wysłania
+    const loginData = {
+      username: username,
+      password: password,
+    };
+  
+    // Opcje żądania HTTP
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(loginData)
+    };
+  
+    // Wywołanie API
+    fetch('http://143.198.111.58/authorization/login', requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        console.log('Login successful:', data);
+        onClose(); // Zamknij formularz po zalogowaniu
+      })
+      .catch(error => {
+        console.error('Login failed:', error);
+      });
   };
 
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="login-email">Email:</label>
+          <label htmlFor="login-Username">Nazwa użytkownika:</label>
           <input
-            type="email"
-            id="login-email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="Username"
+            id="login-Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
         </div>

@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import AccountButton from './components/AccountButton';
-import CharacterCardDropdown from './components/Kartapostaci'; 
-import EncounterGeneratorDropdown from './components/Generatorpotyczek';
 import Sidebar from './components/Sidebar';
 import LoginForm from './components/Loginform';
 import RegisterForm from './components/RegisterForm';

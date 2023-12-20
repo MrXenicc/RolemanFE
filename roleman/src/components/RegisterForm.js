@@ -3,20 +3,57 @@ import './RegisterForm.css'
 
 const RegisterForm = ({ onClose }) => {
   const [email, setEmail] = useState('');
-  const [confirmEmail, setConfirmEmail] = useState('');
-  const [nickname, setNickname] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Tutaj możesz obsłużyć rejestrację, np. wywołać API
-    console.log(email, confirmEmail, nickname, password);
-    onClose(); // Zamknij formularz po rejestracji (opcjonalnie)
+  
+    // Dane do rejestracji
+    const registrationData = {
+      username: username,
+      email: email,
+      password: password
+    };
+  
+    // Opcje żądania HTTP
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(registrationData)
+    };
+  
+    // Wywołanie API
+    fetch('http://143.198.111.58/authorization/register', requestOptions)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Response not OK');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Registration successful:', data);
+        onClose(); // Zamknij formularz po rejestracji
+      })
+      .catch(error => {
+        console.error('Registration failed:', error);
+      });
   };
+  
 
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="username">Nazwa użytkownika:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="register-email">Email:</label>
           <input
@@ -24,26 +61,6 @@ const RegisterForm = ({ onClose }) => {
             id="register-email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="confirm-email">Powtórz email:</label>
-          <input
-            type="email"
-            id="confirm-email"
-            value={confirmEmail}
-            onChange={(e) => setConfirmEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="nickname">Nick:</label>
-          <input
-            type="text"
-            id="nickname"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
             required
           />
         </div>
