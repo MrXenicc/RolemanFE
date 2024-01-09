@@ -26,4 +26,19 @@
   .character-card-dropdown-item:hover {
     background-color: #561f37; /* Kolor tła elementu przy najechaniu */
   }
+
+  .menu-item {
+    cursor: pointer;
+    /* inne style dla przycisku menu */
+  }
+
+  #character-card-dropdown-content {
+    display: block;
+  }
+  
+  .dropdown-menu-item {
+    color: white; /* Kolor tekstu elementów */
+    padding: 10px; /* Wewnętrzny odstęp dla elementów */
+    /* style dla elementów rozwijanego menu */
+  }
   

@@ -1,19 +1,22 @@
-import React from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
-import './Kartapostaci.css'
+import React, { useState } from 'react';
+import { Collapse } from 'react-bootstrap';
 
 const CharacterCardDropdown = () => {
-  return (
-    <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-character-card">
-        Karta Postaci
-      </Dropdown.Toggle>
+  const [open, setOpen] = useState(false);
 
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/my-characters">Moje Postacie</Dropdown.Item>
-        <Dropdown.Item href="#/create-character">Stwórz Postać</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+  return (
+    <>
+      <div className="menu-item" onClick={() => setOpen(!open)}>
+        Karta Postaci
+      </div>
+      <Collapse in={open}>
+        <div id="character-card-dropdown-content">
+          {/* Tu dodaj treść menu */}
+          <div className="dropdown-menu-item">Moje Postacie</div>
+          <div className="dropdown-menu-item">Stwórz Postać</div>
+        </div>
+      </Collapse>
+    </>
   );
 };
 

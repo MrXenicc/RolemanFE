@@ -42,3 +42,13 @@
     background-color: #702f4b; /* Kolor tła przy najechaniu */
   }
   
+  .menu-item {
+    cursor: pointer;
+    color: white; /* Kolor tekstu elementów */
+    padding: 10px; /* Wewnętrzny odstęp dla elementów */
+    /* inne style dla przycisku menu */
+  }
+  
+  #encounter-generator-dropdown-content {
+    display: block;
+  }
