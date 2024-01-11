@@ -6,6 +6,7 @@ import CalendarModal from './components/CalendarModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './components/Sidebar.css'
+import tlo1 from './tło1.png';
 
   const App = () => {
     const [showLogin, setShowLogin] = useState(false);
@@ -62,7 +63,7 @@ import './components/Sidebar.css'
     };
 
     return (
-      <div className="App">
+      <div className="App" style={{ backgroundImage: `url(${tlo1})`}} >
         <Sidebar onLoginClick={() => setShowLogin(true)} onRegisterClick={() => setShowRegister(true)} onCalendarClick={handleCalendarClick} />
         {showCalendar && (
         <CalendarModal

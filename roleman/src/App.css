@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: url('C:\RolemanFE\roleman\public\tło1.png'); /* Ścieżka do obrazu w folderze public */
+  /*background-image: url('C:\RolemanFE\roleman\public\tło1.png'); /* Ścieżka do obrazu w folderze public */
   background-size: cover; /* Pokryj cały dostępny obszar */
   background-position: center; /* Wyśrodkuj obraz */
   background-repeat: no-repeat; /* Nie powtarzaj obrazu */
@@ -9,9 +9,6 @@
   text-align: left; /* Tekst wyrównany do lewej */
   display: flex;
   flex-direction: column;
-  /*background:linear-gradient(rgba(250,0,0,0.5),transparent);
-  background-color:black */
-  /*background-image: linear-gradient(to top, #000000, #640000);*/
 }
 
 .App-header {
@@ -19,33 +16,6 @@
   color: white;
   padding: 50px; /* Dodaj padding dla wyglądu */
   align-self: flex-start;
-}
-
-.account-header {
-  /*background-image: url('C:\RolemanFE\roleman\public\tło.jpg'); /* Ścieżka do obrazu w folderze public */
-  background-size: cover;  
-  display: flex;
-  vertical-align: top;
-  justify-content: flex-end; /* Wyrównaj do prawej strony */
-  padding: 10px; /* Dodaj trochę paddingu dookoła */
-}
-
-.account-header > * {
-  margin-left: 10px;
-}
-
-.account-button {
-  padding: 10px 20px; /* Dodaj trochę paddingu */
-  background-color: #330a0a; /* Kolor tła, dostosuj do koloru strony */
-  color: white; /* Kolor tekstu */
-  border: black; /* Usuń obramowanie */
-  cursor: pointer; /* Kursor wskazujący */
-}
-
-.account-button a {
-  color: inherit;
-  text-decoration: none;
-  display: block; /* Rozciągnij link na całą dostępną szerokość */
 }
 
 .dropdown-toggle, .btn-primary  {
@@ -99,10 +69,6 @@
   align-self: center;
 }
 
-.btn-primary:hover {
-  border: 2px solid black; /* Niebieska obramówka */
-}
-
 .btn-primary:active {
   background-color: black; /* Niebieskie tło */
   color: white;
@@ -128,4 +94,19 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
+}
+
+.menu-item {
+  cursor: pointer;
+  /* inne style dla przycisku menu */
+}
+
+#character-card-dropdown-content {
+  display: block;
+}
+
+.dropdown-menu-item {
+  color: white; /* Kolor tekstu elementów */
+  padding: 5px; /* Wewnętrzny odstęp dla elementów */
+  /* style dla elementów rozwijanego menu */
 }

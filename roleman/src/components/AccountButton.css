@@ -7,24 +7,52 @@
     border: none; /* Brak obramowania */
     cursor: pointer; /* Kursor wskazujący */
     padding: 10px 20px; /* Wewnętrzny odstęp */
+    margin-top: auto;
+    position: relative;
   }
   
   /* Styl dla elementów w rozwijanym menu */
   .account-button-dropdown-menu {
     background-color: #4a1523; /* Kolor tła menu */
-    border: none; /* Brak obramowania */
-    /* Możesz dodać inne style dotyczące menu, np. padding, shadow itp. */
+    position: absolute;
+    bottom: 50px; /* Adjust this value based on the height of your button */
+    width: 100%; /* Assuming you want the dropdown to match the button's width */
+    transform: translateY(-100%); /* This will move it up by its own height */
   }
   
   /* Styl dla poszczególnych elementów w menu */
   .account-button-dropdown-item {
     color: white; /* Kolor tekstu elementów */
-    padding: 10px; /* Wewnętrzny odstęp dla elementów */
-    /* Dodaj inne style, np. hover effects itp. */
+    cursor: pointer; /* Changes the cursor to indicate it's clickable */
+    padding: 8px 16px;
   }
   
   .account-button-dropdown-item:hover {
     background-color: #561f37; /* Kolor tła elementu przy najechaniu */
   }
   
+  .account-button-container {
+    margin-top: auto;
+    text-align: right; /* Aligns the button to the right */
+    position: relative;
+  }
+
+  .account-button {
+    position: absolute;
+    bottom: 0;
+    /* Other styles */
+  }
+
+  .dropdown-content {
+    position: absolute;
+    right: 0;
+    bottom: 100%; /* Ensures the menu appears above the 'Konto' text */
+    background-color: #000; /* Adjust the color to match your sidebar */
+    width: 100%; /* Adjust width as needed */
+    display: none; /* Starts off hidden */
+  }
+
+  .dropdown-content.visible {
+    display: block;
+  }
   

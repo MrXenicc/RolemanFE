@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Collapse, Form, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import './Generatorpotyczek.css'; // Upewnij się, że ścieżka do pliku CSS jest poprawna
 
 const EncounterGeneratorDropdown = () => {
