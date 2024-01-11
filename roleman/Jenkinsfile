@@ -1,0 +1,53 @@
+pipeline{
+    agent{
+        label 'jenkins-agent'
+    }
+    stages{
+        stage('build'){
+            steps{
+                sh 'docker build -t front ./roleman'
+            }
+        }
+        stage('stop container'){
+            steps{
+                script{
+                    def container="front"
+                    def exists = sh(script: "docker ps --format '{{.Names}}' | grep -w ${container}", returnStatus: true) == 0
+                    if(exists){
+                        sh 'docker stop front'
+                    }
+                }
+            }
+        }
+        stage('remove container'){
+            steps{
+                script{
+                    def container="front"
+                    def exists = sh(script: "docker ps -a --format '{{.Names}}' | grep -w ${container}", returnStatus: true) == 0
+                    if(exists){
+                        sh 'docker rm front'
+                    }
+                }
+            }
+        }
+        stage('start new container'){
+            steps{
+                sh 'docker run -d -p 80:80 --network RolemanNetwork --name front front'
+            }
+        }
+    }
+    post {
+        success {
+            discordSend title: "Front", description: "Build Success",link: env.BUILD_URL ,result: currentBuild.currentResult, webhookURL: 'https://discord.com/api/webhooks/1187413665746518136/R4NzybodNzGU0aXUxmGbSfRqwD5ZLkKI7xsfHdIjbDBliPmRO9lMFafHqQdP6rzYHatF'
+        }
+        failure {
+            discordSend title: "Front", description: "Build Failed", link: env.BUILD_URL ,result: currentBuild.currentResult, webhookURL: 'https://discord.com/api/webhooks/1187413665746518136/R4NzybodNzGU0aXUxmGbSfRqwD5ZLkKI7xsfHdIjbDBliPmRO9lMFafHqQdP6rzYHatF'
+        }
+        unstable {
+            discordSend title: "Front", description: "Build Unstable", link: env.BUILD_URL ,result: currentBuild.currentResult, webhookURL: 'https://discord.com/api/webhooks/1187413665746518136/R4NzybodNzGU0aXUxmGbSfRqwD5ZLkKI7xsfHdIjbDBliPmRO9lMFafHqQdP6rzYHatF'
+        }
+        aborted {
+            discordSend title: "Front", description: "Build Aborted", link: env.BUILD_URL ,result: currentBuild.currentResult, webhookURL: 'https://discord.com/api/webhooks/1187413665746518136/R4NzybodNzGU0aXUxmGbSfRqwD5ZLkKI7xsfHdIjbDBliPmRO9lMFafHqQdP6rzYHatF'
+        }
+    }
+}
