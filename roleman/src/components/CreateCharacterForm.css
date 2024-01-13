@@ -1,0 +1,31 @@
+.character-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Wyśrodkowanie elementów w poziomie */
+    justify-content: center; /* Wyśrodkowanie elementów w pionie */
+    /* ... inne style */
+  }
+  
+  .character-form-container label {
+    margin: 10px 0; /* Dodaje margines na górze i na dole dla każdej etykiety */
+    width: 100%; /* Opcjonalnie, aby etykieta rozciągała się na całą szerokość */
+  }
+  
+  .character-form-container input, .character-form-container select {
+    width: 90%; /* Ustaw szerokość inputów i select */
+    margin: 5px 0; /* Dodaje margines na górze i na dole dla każdego inputu */
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-evenly; /* Rozłoży przyciski równomiernie */
+    width: 100%; /* Opcjonalnie, aby kontener przycisków rozciągał się na całą szerokość */
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: center;
+  }
+  
+  .button {
+    margin-top: 10px; /* Dodaje margines na górze dla przycisku */
+  }

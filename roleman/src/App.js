@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar';
 import LoginForm from './components/Loginform';
 import RegisterForm from './components/RegisterForm';
 import CalendarModal from './components/CalendarModal';
+import CreateCharacterForm from './components/CreateCharacterForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './components/Sidebar.css'
@@ -14,6 +15,9 @@ import tlo1 from './tło1.png';
     const [showCalendar, setShowCalendar] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [events, setEvents] = useState({});
+    const [showCreateCharacter, setShowCreateCharacter] = useState(false);
+
+    
 
     const handleLoginClick = () => {
       setShowLogin(true);

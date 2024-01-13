@@ -56,8 +56,8 @@ const LoginForm = ({ onClose }) => {
             required
           />
         </div>
-        <button type="submit">Zaloguj się</button>
       </form>
+      <button type="submit">Zaloguj się</button>
       <button onClick={onClose}>Zamknij</button>
     </div>
   );

@@ -1,7 +1,7 @@
-/* RegisterForm.css */
+/* LoginForm.css */
 
 /* Główny kontener formularza */
-.register-form-container {
+.CharacterList-form-container {
     background: rgba(0, 0, 0, 0.5); /* Kolor tła formularza */
     padding: 20px; /* Wewnętrzny odstęp */
     border-radius: 8px; /* Zaokrąglone rogi */
@@ -12,7 +12,7 @@
   }
   
   /* Style dla pól tekstowych */
-  .register-form-input {
+  .CharacterList-form-input {
     width: 100%; /* Szerokość na całą dostępną przestrzeń */
     padding: 10px; /* Wewnętrzny odstęp */
     margin-bottom: 15px; /* Odstęp od dolnego elementu */
@@ -20,8 +20,8 @@
     border-radius: 4px; /* Zaokrąglone rogi */
   }
   
-  /* Styl dla przycisku rejestracji */
-  .register-form-button {
+  /* Styl dla przycisku logowania */
+  .CharacterList-form-button {
     width: 100%; /* Szerokość na całą dostępną przestrzeń */
     padding: 10px 20px; /* Wewnętrzny odstęp */
     background: rgba(0, 0, 0, 0.5); /* Kolor tła */
@@ -31,15 +31,19 @@
     cursor: pointer; /* Kursor wskazujący */
   }
   
-  .register-form-button:hover {
+  .CharacterList-form-button:hover {
     background: rgba(0, 0, 0, 0.5); /* Kolor tła przy najechaniu */
   }
   
   /* Style dla linków lub dodatkowych opcji */
-  .register-form-link {
+  .CharacterList-form-link {
     background: rgba(0, 0, 0, 0.5); /* Kolor tekstu linków */
     text-decoration: none; /* Brak podkreślenia */
     display: block; /* Wyświetlanie jako blok */
     margin-top: 10px; /* Odstęp od góry */
+  }
+
+  .character-name {
+    cursor: pointer;
   }
   

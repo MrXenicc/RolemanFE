@@ -74,8 +74,8 @@ const RegisterForm = ({ onClose }) => {
             required
           />
         </div>
-        <button type="submit">Zarejestruj się</button>
       </form>
+      <button type="submit">Zarejestruj się</button>
       <button onClick={onClose}>Zamknij</button>
     </div>
   );

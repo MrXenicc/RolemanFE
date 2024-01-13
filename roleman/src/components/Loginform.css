@@ -2,7 +2,7 @@
 
 /* Główny kontener formularza */
 .login-form-container {
-    background-color: #fff; /* Kolor tła formularza */
+    background: rgba(0, 0, 0, 0.5); /* Kolor tła formularza */
     padding: 20px; /* Wewnętrzny odstęp */
     border-radius: 8px; /* Zaokrąglone rogi */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Cień */
@@ -24,7 +24,7 @@
   .login-form-button {
     width: 100%; /* Szerokość na całą dostępną przestrzeń */
     padding: 10px 20px; /* Wewnętrzny odstęp */
-    background-color: #330a0a; /* Kolor tła */
+    background: rgba(0, 0, 0, 0.5); /* Kolor tła */
     color: white; /* Kolor tekstu */
     border: none; /* Brak obramowania */
     border-radius: 4px; /* Zaokrąglone rogi */
@@ -32,12 +32,12 @@
   }
   
   .login-form-button:hover {
-    background-color: #561f37; /* Kolor tła przy najechaniu */
+    background: rgba(0, 0, 0, 0.5); /* Kolor tła przy najechaniu */
   }
   
   /* Style dla linków lub dodatkowych opcji */
   .login-form-link {
-    color: #330a0a; /* Kolor tekstu linków */
+    background: rgba(0, 0, 0, 0.5); /* Kolor tekstu linków */
     text-decoration: none; /* Brak podkreślenia */
     display: block; /* Wyświetlanie jako blok */
     margin-top: 10px; /* Odstęp od góry */

@@ -39,6 +39,26 @@
   .dropdown-menu-item {
     color: white; /* Kolor tekstu elementów */
     padding: 10px; /* Wewnętrzny odstęp dla elementów */
-    /* style dla elementów rozwijanego menu */
+    cursor: pointer;
   }
+
+  .character-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #ccc; /* Dodaje linię pod każdą postacią */
+    margin-bottom: 5px;
+  }
+  
+  .character-name {
+    cursor: pointer;
+    
+  }
+  
+  .character-name:hover {
+    color: red; /* Ciemniejszy kolor przy najechaniu */
+  }
+
+  
   

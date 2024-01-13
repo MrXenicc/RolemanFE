@@ -44,7 +44,7 @@
   top: 50%; /* Centrowanie w pionie */
   left: 50%; /* Centrowanie w poziomie */
   transform: translate(-50%, -50%); /* Ajustowanie pozycji centrowania */
-  background-color: #5c0a0a; /* Kolor tła dla formularza */
+  background: rgba(0, 0, 0, 0.5);  /* Kolor tła dla formularza */
   padding: 20px; /* Padding wewnątrz formularza */
   border: 2px solid black; 
 }
@@ -59,7 +59,9 @@
 }
 
 .form-container button {
-  align-self: center; /* Wyśrodkowanie przycisku */
+  align-self: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .form-group {
