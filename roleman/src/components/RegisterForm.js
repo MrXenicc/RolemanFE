@@ -5,6 +5,7 @@ const RegisterForm = ({ onClose }) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const apiUrl = process.env.REACT_APP_ROLEMAN_BE + '/authorization/register';
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -24,7 +25,7 @@ const RegisterForm = ({ onClose }) => {
     };
   
     // Wywołanie API
-    fetch('http://143.198.111.58/authorization/register', requestOptions)
+    fetch(apiUrl, requestOptions)
       .then(response => {
         if (!response.ok) {
           throw new Error('Response not OK');
@@ -38,7 +39,12 @@ const RegisterForm = ({ onClose }) => {
       .catch(error => {
         console.error('Registration failed:', error);
       });
+
+  
+  console.log('Sending registration data:', requestOptions.body);
+
   };
+  
   
 
   return (
@@ -74,8 +80,10 @@ const RegisterForm = ({ onClose }) => {
             required
           />
         </div>
+      <div className="form-group">
+      <button type="submit">{process.env.REACT_APP_ROLEMAN_BE}</button>
+      </div>
       </form>
-      <button type="submit">Zarejestruj się</button>
       <button onClick={onClose}>Zamknij</button>
     </div>
   );

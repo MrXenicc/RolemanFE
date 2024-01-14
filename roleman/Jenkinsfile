@@ -3,6 +3,11 @@ pipeline{
         label 'jenkins-agent'
     }
     stages{
+        stage("env"){
+			steps{
+				sh 'echo REACT_APP_ROLEMAN_BE=http://gateway:9090 > ./roleman/.env'
+			}
+		}
         stage('build'){
             steps{
                 sh 'docker build -t front ./roleman'

@@ -4,6 +4,7 @@ import './Loginform.css'
 const LoginForm = ({ onClose }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const apiUrl = process.env.REACT_APP_ROLEMAN_BE + '/authorization/login';
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,7 +23,7 @@ const LoginForm = ({ onClose }) => {
     };
   
     // Wywołanie API
-    fetch('http://143.198.111.58/authorization/login', requestOptions)
+    fetch(apiUrl, requestOptions)
       .then(response => response.json())
       .then(data => {
         console.log('Login successful:', data);
@@ -56,8 +57,10 @@ const LoginForm = ({ onClose }) => {
             required
           />
         </div>
+        <div className="form-group">
+        <button type="submit">Zaloguj się</button>
+        </div>
       </form>
-      <button type="submit">Zaloguj się</button>
       <button onClick={onClose}>Zamknij</button>
     </div>
   );
