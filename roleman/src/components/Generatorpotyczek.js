@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import EncounterPopup from './EncounterPopup';
 import './Generatorpotyczek.css'; // Upewnij się, że ścieżka do pliku CSS jest poprawna
 
 const EncounterGeneratorDropdown = () => {
@@ -8,16 +9,28 @@ const EncounterGeneratorDropdown = () => {
   const [teamLevel, setTeamLevel] = useState('');
   const [rarity, setRarity] = useState('');
   const [difficulty, setDifficulty] = useState('');
+  const [showEncounterPopup, setShowEncounterPopup] = useState(false);
+  const [encounterData, setEncounterData] = useState(null);
 
   const handleGenerate = (event) => {
     event.preventDefault();
-    // Logika generowania potyczki
-    console.log(teamSize, teamLevel, rarity, difficulty);
+    const generatedEncounterData = {
+      monsters: [
+        { name: 'Goblin', count: 3, imageUrl: '/images/goblin.png' },
+        { name: 'Dragon', count: 1, imageUrl: '/images/dragon.png' },
+      ],
+    // // Logika generowania potyczki
+    // console.log(teamSize, teamLevel, rarity, difficulty);
   };
+  setEncounterData(generatedEncounterData);
+  setShowEncounterPopup(true); // Pokaż okienko potyczki
+};
+  
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
+
 
   return (
     <div>
@@ -48,6 +61,9 @@ const EncounterGeneratorDropdown = () => {
             </Button>
           </Form>
         </div>
+      )}
+      {showEncounterPopup && encounterData && (
+        <EncounterPopup data={encounterData} onClose={() => setShowEncounterPopup(false)} />
       )}
     </div>
   );
