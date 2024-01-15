@@ -5,7 +5,7 @@ pipeline{
     stages{
         stage("env"){
 			steps{
-				sh 'echo REACT_APP_ROLEMAN_BE=http://gateway:9090 > ./roleman/.env'
+				sh 'echo REACT_APP_ROLEMAN_BE=http://172.18.0.6:9090 > ./roleman/.env'
 			}
 		}
         stage('build'){
