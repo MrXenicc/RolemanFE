@@ -45,6 +45,11 @@ import React from 'react';
 import './EncounterPopup.css'; // Stwórz odpowiedni plik CSS
 
 const EncounterPopup = ({ data, onClose }) => {
+  if (!data || !data.monsters) {
+    // Nie próbuj renderować zawartości komponentu, jeśli dane są niekompletne
+    return null;
+  }
+
   return (
    
 <div className="encounter-popup">

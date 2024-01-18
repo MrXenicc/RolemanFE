@@ -24,20 +24,24 @@ const LoginForm = ({ onClose }) => {
   
     // Wywołanie API
     fetch(apiUrl, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        if (data.token) {
-          // Zapisz token w localStorage
-          localStorage.setItem('token', data.token);
-          console.log('Login successful:', data);
-          onClose(); // Zamknij formularz po zalogowaniu
-        } else {
-          console.error('Login failed: No token received');
-        }
-      })
-      .catch(error => {
-        console.error('Login failed:', error);
-      });
+  .then(response => {
+    // Odczytaj token z nagłówka 'Authorization'
+    const authToken = response.headers.get('Authorization');
+    if (authToken) {
+      const token = authToken.split(' ')[1]; // Usuń 'Bearer' z ciągu
+      // Zapisz token w localStorage
+      localStorage.setItem('token', token);
+      console.log('Login successful: Token saved');
+      onClose(); // Zamknij formularz po zalogowaniu
+    } else {
+      console.error('Login failed: No token received');
+    }
+    return response.json();
+  })
+  .catch(error => {
+    console.error('Login failed:', error);
+  });
+
   };
 
   return (

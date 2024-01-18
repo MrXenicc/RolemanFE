@@ -8,8 +8,8 @@ const EncounterGeneratorDropdown = () => {
   const [teamSize, setTeamSize] = useState('');
   const [teamLevel, setTeamLevel] = useState('');
   const [enemySize, setEnemySize] = useState('');
-  const [rarity, setRarity] = useState('');
-  const [difficulty, setDifficulty] = useState('');
+  const [rarity, setRarity] = useState('COMMON');
+  const [difficulty, setDifficulty] = useState('EASY');
   const [showEncounterPopup, setShowEncounterPopup] = useState(false);
   const [encounterData, setEncounterData] = useState(null);
   const rarities = ["COMMON", "UNCOMMON", "RARE", "VERYRARE", "LEGENDARY"];
@@ -33,18 +33,18 @@ const EncounterGeneratorDropdown = () => {
 const handleGenerate = (event) => {
   event.preventDefault();
   
-  // const token = localStorage.getItem('token'); // Pobierz token z localStorage
-  //   if (!token) {
-  //     console.error('Error: No token found');
-  //     return;
-  //   }
+  const token = localStorage.getItem('token'); // Pobierz token z localStorage
+    if (!token) {
+      console.error('Error: No token found');
+      return;
+    }
 
   // Here we are assuming that the generatedEncounterData is shaped according to the GeneratorDto schema.
   const requestOptions = {
     method: 'POST',
     headers: { 
       'Content-Type': 'application/json',
-      //'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`
     },
     body: JSON.stringify({
       numberOfPlayers: parseInt(teamSize),
