@@ -52,7 +52,7 @@ const EncounterPopup = ({ data, onClose }) => {
         <h2>Wygenerowana Potyczka</h2>
         {data.monsters.map((monster, index) => (
           <div key={index} className="monster-info">
-            <img src={monster.imageUrl} alt={monster.name} />
+            <img className="monster-image" src={monster.imageUrl} alt={monster.name} />
             <p>{monster.name} - Ilość: {monster.count}</p>
           </div>
         ))}

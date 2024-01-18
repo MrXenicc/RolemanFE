@@ -26,8 +26,14 @@ const LoginForm = ({ onClose }) => {
     fetch(apiUrl, requestOptions)
       .then(response => response.json())
       .then(data => {
-        console.log('Login successful:', data);
-        onClose(); // Zamknij formularz po zalogowaniu
+        if (data.token) {
+          // Zapisz token w localStorage
+          localStorage.setItem('token', data.token);
+          console.log('Login successful:', data);
+          onClose(); // Zamknij formularz po zalogowaniu
+        } else {
+          console.error('Login failed: No token received');
+        }
       })
       .catch(error => {
         console.error('Login failed:', error);

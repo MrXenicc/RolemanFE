@@ -25,3 +25,11 @@
     color: white;
     background: rgba(0, 0, 0, 0.5);
   }
+
+  .monster-image {
+    max-width: 100px; /* maksymalna szerokość obrazu to 100% kontenera nadrzędnego */
+    height: 100px; /* wysokość jest automatycznie dostosowywana do zachowania proporcji */
+    display: block; /* obrazy są wyświetlane jako bloki, co pozwala na łatwiejsze zarządzanie rozmiarem i marginesami */
+    margin: 0 auto; /* centruje obraz w kontenerze, jeśli jest mniejszy niż kontener */
+
+  }

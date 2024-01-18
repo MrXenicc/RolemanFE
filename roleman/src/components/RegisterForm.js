@@ -81,7 +81,7 @@ const RegisterForm = ({ onClose }) => {
           />
         </div>
       <div className="form-group">
-      <button type="submit">{process.env.REACT_APP_ROLEMAN_BE}</button>
+      <button type="submit">Zarejestruj się</button>
       </div>
       </form>
       <button onClick={onClose}>Zamknij</button>

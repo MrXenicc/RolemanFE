@@ -12,17 +12,19 @@ const EncounterGeneratorDropdown = () => {
   const [difficulty, setDifficulty] = useState('');
   const [showEncounterPopup, setShowEncounterPopup] = useState(false);
   const [encounterData, setEncounterData] = useState(null);
+  const rarities = ["COMMON", "UNCOMMON", "RARE", "VERYRARE", "LEGENDARY"];
+  const difficulties = ["EASY", "MEDIUM", "HARD", "DEADLY"];
   const apiUrl = process.env.REACT_APP_ROLEMAN_BE + '/generator/generate';
 
-//   const handleGenerate = (event) => {
-//     event.preventDefault();
-//     const generatedEncounterData = {
-//       monsters: [
-//         { name: 'Goblin', count: 3, imageUrl: '/images/goblin.png' },
-//         { name: 'Dragon', count: 1, imageUrl: '/images/dragon.png' },
-//       ],
-//     // // Logika generowania potyczki
-//     // console.log(teamSize, teamLevel, rarity, difficulty);
+  // const handleGenerate = (event) => {
+  //   event.preventDefault();
+    // const generatedEncounterData = {
+    //   monsters: [
+    //     { name: 'Goblin', count: 3, imageUrl: 'https://img00.deviantart.net/1c21/i/2014/210/7/2/goblin_by_aaronflorento-d7srkrg.jpg' },
+    //    // { name: 'Dragon', count: 1, imageUrl: 'https://images.ctfassets.net/swt2dsco9mfe/4Dkulb3CgE4D7V3yJid7tP/1a8f93f5df165d60f8233f78d7ab9220/product-hero-starterset.jpg' },
+    //   ],
+    // // // Logika generowania potyczki
+    // // console.log(teamSize, teamLevel, rarity, difficulty);
 //   };
 //   setEncounterData(generatedEncounterData);
 //   setShowEncounterPopup(true); // Pokaż okienko potyczki
@@ -31,10 +33,19 @@ const EncounterGeneratorDropdown = () => {
 const handleGenerate = (event) => {
   event.preventDefault();
   
+  // const token = localStorage.getItem('token'); // Pobierz token z localStorage
+  //   if (!token) {
+  //     console.error('Error: No token found');
+  //     return;
+  //   }
+
   // Here we are assuming that the generatedEncounterData is shaped according to the GeneratorDto schema.
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      //'Authorization': `Bearer ${token}`
+    },
     body: JSON.stringify({
       numberOfPlayers: parseInt(teamSize),
       teamLevel: parseInt(teamLevel),
@@ -72,23 +83,31 @@ const handleGenerate = (event) => {
           <Form onSubmit={handleGenerate}>
             <Form.Group>
               <Form.Label>Ilość osób w drużynie</Form.Label>
-              <Form.Control type="text" placeholder="Wpisz ilość osób" value={teamSize} onChange={(e) => setTeamSize(e.target.value)} />
+              <Form.Control type="number" placeholder="Wpisz ilość osób" min="1" value={teamSize} onChange={(e) => setTeamSize(e.target.value)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Poziom drużyny</Form.Label>
-              <Form.Control type="text" placeholder="Wpisz poziom drużyny" value={teamLevel} onChange={(e) => setTeamLevel(e.target.value)} />
+              <Form.Control type="number" placeholder="Wpisz poziom drużyny" min="1" max="20" value={teamLevel} onChange={(e) => setTeamLevel(e.target.value)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Ilość przeciwników</Form.Label>
-              <Form.Control type="text" placeholder="Wpisz ilość przeciwników" value={enemySize} onChange={(e) => setEnemySize(e.target.value)} />
+              <Form.Control type="number" placeholder="Wpisz ilość przeciwników" min="1" value={enemySize} onChange={(e) => setEnemySize(e.target.value)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Rzadkość</Form.Label>
-              <Form.Control type="text" placeholder="Wpisz rzadkość" value={rarity} onChange={(e) => setRarity(e.target.value)} />
+              <Form.Select value={rarity} onChange={(e) => setRarity(e.target.value)}>
+                {rarities.map(rarityOption => (
+                  <option key={rarityOption} value={rarityOption}>{rarityOption}</option>
+                ))}
+              </Form.Select>
             </Form.Group>
             <Form.Group>
               <Form.Label>Trudność</Form.Label>
-              <Form.Control type="text" placeholder="Wpisz trudność" value={difficulty} onChange={(e) => setDifficulty(e.target.value)} />
+              <Form.Select value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
+                {difficulties.map(difficultyOption => (
+                  <option key={difficultyOption} value={difficultyOption}>{difficultyOption}</option>
+                ))}
+              </Form.Select>
             </Form.Group>
             <Button variant="primary" type="submit">
               Generuj
