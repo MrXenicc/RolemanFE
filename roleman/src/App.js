@@ -8,7 +8,7 @@ import EncounterPopup from './components/EncounterPopup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './components/Sidebar.css'
-import tlo1 from './tło1.webp';
+import tlo1 from './tło1.png';
 
   const App = () => {
     const [showLogin, setShowLogin] = useState(false);
@@ -19,6 +19,9 @@ import tlo1 from './tło1.webp';
     //const [showCreateCharacter, setShowCreateCharacter] = useState(false);
     const [isEncounterPopupVisible, setIsEncounterPopupVisible] = useState(false);
     const [encounterPopupData, setEncounterPopupData] = useState(null);
+    const [backgroundLoaded, setBackgroundLoaded] = useState(false);
+    const [logoLoaded, setLogoLoaded] = useState(false);
+
 
     
 
@@ -79,7 +82,19 @@ import tlo1 from './tło1.webp';
     };
 
     return (
-      <div className="App" style={{ backgroundImage: `url(${tlo1})`}} >
+      <div className="App" style={{ 
+        backgroundImage: backgroundLoaded ? `url(${tlo1})` : 'none', // 'none' to placeholder, możesz użyć innego tła jako fallback
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        minHeight: '100vh',
+      }} >
+        <img
+         src={tlo1}
+         alt="Tło"
+         onLoad={() => setBackgroundLoaded(true)}
+         style={{ display: 'none' }} // Obraz jest niewidoczny, służy tylko do załadowania tła
+        />
         <Sidebar onLoginClick={() => setShowLogin(true)} onRegisterClick={() => setShowRegister(true)} onCalendarClick={handleCalendarClick} onGenerateEncounter={showEncounterPopup} />
         {showCalendar && (
         <CalendarModal
@@ -100,7 +115,17 @@ import tlo1 from './tło1.webp';
         </>
         )}
         <header className="App-header">
-          <img src="/Logo1.webp" alt="Roleman Logo" style={{ width: '200px', height: 'auto' }} />
+        {logoLoaded ? (
+          <img src="/Logo1.png" alt="Roleman Logo" style={{ width: '200px', height: 'auto' }} />
+          ) : (
+          <div></div> // Możesz tu umieścić spinner ładowania lub inny placeholder
+        )}
+          <img
+          src="/Logo1.png"
+          alt="Roleman Logo"
+          onLoad={() => setLogoLoaded(true)}
+          style={{ display: 'none' }} // Obraz jest niewidoczny, służy tylko do załadowania
+          />
         </header>
       </div>
     );

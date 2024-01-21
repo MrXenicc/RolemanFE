@@ -57,6 +57,8 @@ import './EncounterPopup.css';
 
 const EncounterPopup = ({ data, onClose }) => {
   const [detailsVisible, setDetailsVisible] = useState(new Array(data.length).fill(false));
+  const [imagesLoaded, setImagesLoaded] = useState(new Array(data.length).fill(false));
+
 
   if (!data || data.length === 0) {
     return null;
@@ -66,6 +68,10 @@ const EncounterPopup = ({ data, onClose }) => {
     setDetailsVisible(detailsVisible.map((detail, i) => i === index ? !detail : detail));
   };
 
+  const handleImageLoaded = (index) => {
+    setImagesLoaded(imagesLoaded.map((loaded, i) => i === index ? true : loaded));
+  };
+
   return (
     <div className="encounter-popup">
       <div className="encounter-content">
@@ -73,7 +79,14 @@ const EncounterPopup = ({ data, onClose }) => {
         <div className="monsters-container">
           {data.map((monster, index) => (
             <div key={index} className="monster-info">
-              <img className="monster-image" src={monster.image} alt={monster.name} />
+               <img
+                className="monster-image"
+                src={monster.image}
+                alt={monster.name}
+                onLoad={() => handleImageLoaded(index)}
+                style={{ visibility: imagesLoaded[index] ? 'visible' : 'hidden' }} // używaj 'hidden', aby zachować przestrzeń dla obrazka, dopóki się nie załaduje
+              />
+              {!imagesLoaded[index] && <div>Ładowanie obrazka...</div>} {/* Możesz tu umieścić spinner lub inny placeholder */}
               <p>Nazwa: {monster.name} - Ilość: {monster.number}</p>
               <p>Rzadkość: {monster.rarity} - CR: {monster.cr}</p>
               <button onClick={() => toggleDetails(index)} className="details-button">
