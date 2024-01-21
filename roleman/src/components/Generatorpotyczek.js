@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import EncounterPopup from './EncounterPopup';
 import './Generatorpotyczek.css'; // Upewnij się, że ścieżka do pliku CSS jest poprawna
 
-const EncounterGeneratorDropdown = () => {
+const EncounterGeneratorDropdown = ({ onGenerateEncounter }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [teamSize, setTeamSize] = useState('');
   const [teamLevel, setTeamLevel] = useState('');
@@ -61,12 +61,13 @@ const handleGenerate = (event) => {
     .then(data => {
       console.log('Encounter generated:', data);
       setEncounterData(data); // Set the encounter data with the response from the backend
-      setShowEncounterPopup(true); // Show encounter popup with the new data
+      console.log('showEncounterPopup:', showEncounterPopup);
+      onGenerateEncounter(data); // Show encounter popup with the new data
     })
     .catch(error => {
       console.error('Error generating encounter:', error);
     });
-};
+};  
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);

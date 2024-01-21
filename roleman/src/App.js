@@ -3,7 +3,8 @@ import Sidebar from './components/Sidebar';
 import LoginForm from './components/Loginform';
 import RegisterForm from './components/RegisterForm';
 import CalendarModal from './components/CalendarModal';
-import CreateCharacterForm from './components/CreateCharacterForm';
+//import CreateCharacterForm from './components/CreateCharacterForm';
+import EncounterPopup from './components/EncounterPopup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './components/Sidebar.css'
@@ -15,19 +16,21 @@ import tlo1 from './tło1.png';
     const [showCalendar, setShowCalendar] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [events, setEvents] = useState({});
-    const [showCreateCharacter, setShowCreateCharacter] = useState(false);
+    //const [showCreateCharacter, setShowCreateCharacter] = useState(false);
+    const [isEncounterPopupVisible, setIsEncounterPopupVisible] = useState(false);
+    const [encounterPopupData, setEncounterPopupData] = useState(null);
 
     
 
-    const handleLoginClick = () => {
-      setShowLogin(true);
-      setShowRegister(false);
-    };
+    // const handleLoginClick = () => {
+    //   setShowLogin(true);
+    //   setShowRegister(false);
+    // };
 
-    const handleRegisterClick = () => {
-      setShowRegister(true);
-      setShowLogin(false);
-    };
+    // const handleRegisterClick = () => {
+    //   setShowRegister(true);
+    //   setShowLogin(false);
+    // };
 
     const handleCalendarClick = () => {
       setShowCalendar(true);
@@ -66,9 +69,18 @@ import tlo1 from './tło1.png';
       setEvents(updatedEvents);
     };
 
+    const showEncounterPopup = (data) => {
+      setEncounterPopupData(data);
+      setIsEncounterPopupVisible(true);
+    };
+
+    const hideEncounterPopup = () => {
+      setIsEncounterPopupVisible(false);
+    };
+
     return (
       <div className="App" style={{ backgroundImage: `url(${tlo1})`}} >
-        <Sidebar onLoginClick={() => setShowLogin(true)} onRegisterClick={() => setShowRegister(true)} onCalendarClick={handleCalendarClick} />
+        <Sidebar onLoginClick={() => setShowLogin(true)} onRegisterClick={() => setShowRegister(true)} onCalendarClick={handleCalendarClick} onGenerateEncounter={showEncounterPopup} />
         {showCalendar && (
         <CalendarModal
           onClose={() => setShowCalendar(false)}
@@ -81,6 +93,12 @@ import tlo1 from './tło1.png';
         )}
         {showLogin && <LoginForm onClose={() => setShowLogin(false)} />}
         {showRegister && <RegisterForm onClose={() => setShowRegister(false)} />}
+        {isEncounterPopupVisible && (
+        <>
+          <div className="modal-backdrop" onClick={hideEncounterPopup}></div>
+          <EncounterPopup data={encounterPopupData} onClose={hideEncounterPopup} />
+        </>
+        )}
         <header className="App-header">
           <img src="/Logo1.png" alt="Roleman Logo" style={{ width: '200px', height: 'auto' }} />
         </header>

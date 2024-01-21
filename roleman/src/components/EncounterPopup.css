@@ -1,35 +1,118 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1040;
+}
+
+body .modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5) !important; /* Używaj !important jako ostateczność */
+}
+
 .encounter-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.5);;
-    padding: 20px;
-    z-index: 1000; /* Wyższy niż reszta strony */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .encounter-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .monster-info {
-    margin-bottom: 10px;
-  }
-  
-  .close-button {
-    align-self: center;
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
-  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5); /* Lekko ciemniejsze tło */
+  color: #FFF; /* Biały tekst */
+  padding: 20px;
+  z-index: 1050; /* Wyższy niż reszta strony */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 90vw; /* Maksymalna szerokość okienka */
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto; /* Dodaje pasek przewijania gdy treść jest za długa */
+  scrollbar-width: thin; /* "thin" dla cieńszych pasków przewijania */
+  scrollbar-color: #555 #000;
+}
 
-  .monster-image {
-    max-width: 100px; /* maksymalna szerokość obrazu to 100% kontenera nadrzędnego */
-    height: 100px; /* wysokość jest automatycznie dostosowywana do zachowania proporcji */
-    display: block; /* obrazy są wyświetlane jako bloki, co pozwala na łatwiejsze zarządzanie rozmiarem i marginesami */
-    margin: 0 auto; /* centruje obraz w kontenerze, jeśli jest mniejszy niż kontener */
+.encounter-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: calc(90vh - 40px); 
+  margin-bottom: 10px;
+}
 
-  }
+.monster-info {
+  background: rgba(255, 255, 255, 0.1); /* Lekko przeźroczyste tło dla każdego potwora */
+  border-radius: 4px; /* Zaokrąglenie rogów */
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%; /* Pełna szerokość wewnątrz .encounter-content */
+  flex: 0 0 auto;
+}
+
+.close-button {
+  align-self: flex-end;
+  color: white;
+  background: rgba(0, 0, 0, 0.5); /* Czerwony kolor tła dla przycisku */
+  border: none;
+  padding: 10px 20px;
+  margin-top: 0;
+  cursor: pointer; /* Kursor wskazuje, że przycisk jest klikalny */
+  border-radius: 4px; /* Zaokrąglenie rogów */
+}
+
+.close-button-container {
+  display: flex;
+  margin-top: auto; 
+  justify-content: flex-end; /* Przycisk w prawym dolnym rogu */
+}
+
+.details-button{
+  align-self: flex-end;
+  color: white;
+  background: rgba(0, 0, 0, 0.5); /* Czerwony kolor tła dla przycisku */
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer; /* Kursor wskazuje, że przycisk jest klikalny */
+  border-radius: 4px; /* Zaokrąglenie rogów */
+}
+
+.monster-image {
+  max-width: 200px;
+  height: auto; /* Wysokość jest automatycznie dostosowywana do zachowania proporcji */
+  display: block;
+  margin: 10px auto; /* Centruje obraz w kontenerze */
+    border-radius: 50%; /* Okrągłe zdjęcia potworów */
+}
+
+.character-sheet, .battle-stats {
+  text-align: left; /* Tekst wyrównany do lewej */
+  width: 100%; /* Pełna szerokość */
+  margin-top: 10px;
+}
+
+.character-sheet p, .battle-stats p {
+  margin: 5px 0; /* Mały odstęp między liniami */
+  font-size: 0.9em; /* Nieco mniejsza czcionka dla atrybutów */
+}
+
+.encounter-popup::-webkit-scrollbar {
+  width: 10px; /* szerokość paska przewijania */
+}
+
+.encounter-popup::-webkit-scrollbar-track {
+  background: #000; /* kolor tła ścieżki paska przewijania */
+}
+
+.encounter-popup::-webkit-scrollbar-thumb {
+  background: #555; /* kolor "kciuka" paska przewijania */
+}
+
+.monsters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Odstęp między potworami */
+  justify-content: center; /* Wyśrodkuj potwory, jeśli zajmują mniej niż pełną szerokość */
+  max-height: 70vh; /* Ogranicz wysokość kontenera */
+}
+

@@ -4,7 +4,7 @@ import EncounterGeneratorDropdown from './Generatorpotyczek';
 import AccountButton from './AccountButton';
 import './Sidebar.css'; // Make sure the CSS path is correct
 
-const Sidebar = ({ onLoginClick, onRegisterClick, onCalendarClick }) => {
+const Sidebar = ({ onLoginClick, onRegisterClick, onCalendarClick, onGenerateEncounter }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const handleToggleSidebar = () => {
@@ -15,7 +15,7 @@ const Sidebar = ({ onLoginClick, onRegisterClick, onCalendarClick }) => {
     <>
       <div className={`sidebar ${sidebarOpen ? 'expanded' : 'collapsed'}`}>
         <CharacterCardDropdown />
-        <EncounterGeneratorDropdown />
+        <EncounterGeneratorDropdown onGenerateEncounter={onGenerateEncounter} />
         <div className="menu-item" onClick={onCalendarClick}>
           Kalendarz
         </div>
