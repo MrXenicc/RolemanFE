@@ -8,7 +8,7 @@ import EncounterPopup from './components/EncounterPopup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './components/Sidebar.css'
-import tlo1 from './tło1.png';
+import tlo1 from './tło1.webp';
 
   const App = () => {
     const [showLogin, setShowLogin] = useState(false);
@@ -116,12 +116,12 @@ import tlo1 from './tło1.png';
         )}
         <header className="App-header">
         {logoLoaded ? (
-          <img src="/Logo1.png" alt="Roleman Logo" style={{ width: '200px', height: 'auto' }} />
+          <img src="/Logo1.webp" alt="Roleman Logo" style={{ width: '200px', height: 'auto' }} />
           ) : (
           <div></div> // Możesz tu umieścić spinner ładowania lub inny placeholder
         )}
           <img
-          src="/Logo1.png"
+          src="/Logo1.webp"
           alt="Roleman Logo"
           onLoad={() => setLogoLoaded(true)}
           style={{ display: 'none' }} // Obraz jest niewidoczny, służy tylko do załadowania
