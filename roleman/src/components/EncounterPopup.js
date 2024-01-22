@@ -86,7 +86,7 @@ const EncounterPopup = ({ data, onClose }) => {
                 onLoad={() => handleImageLoaded(index)}
                 style={{ visibility: imagesLoaded[index] ? 'visible' : 'hidden' }} // używaj 'hidden', aby zachować przestrzeń dla obrazka, dopóki się nie załaduje
               />
-              {!imagesLoaded[index] && <div>Ładowanie obrazka...</div>} {/* Możesz tu umieścić spinner lub inny placeholder */}
+              {!imagesLoaded[index]} {/* Możesz tu umieścić spinner lub inny placeholder */}
               <p>Nazwa: {monster.name} - Ilość: {monster.number}</p>
               <p>Rzadkość: {monster.rarity} - CR: {monster.cr}</p>
               <button onClick={() => toggleDetails(index)} className="details-button">
