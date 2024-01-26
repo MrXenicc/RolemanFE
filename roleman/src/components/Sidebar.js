@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import CharacterCardDropdown from './Kartapostaci'; 
 import EncounterGeneratorDropdown from './Generatorpotyczek';
 import AccountButton from './AccountButton';
+import CampaignDropdown from './CampaignDropdown';
 import './Sidebar.css'; // Make sure the CSS path is correct
 
-const Sidebar = ({ onLoginClick, onRegisterClick, onCalendarClick, onGenerateEncounter }) => {
+const Sidebar = ({ onLoginClick, onRegisterClick, onCalendarClick, onGenerateEncounter, onNewCampaignClick, onMyCampaignsClick }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const handleToggleSidebar = () => {
@@ -14,6 +15,7 @@ const Sidebar = ({ onLoginClick, onRegisterClick, onCalendarClick, onGenerateEnc
   return (
     <>
       <div className={`sidebar ${sidebarOpen ? 'expanded' : 'collapsed'}`}>
+        <CampaignDropdown onNewCampaignClick={onNewCampaignClick} onMyCampaignsClick={onMyCampaignsClick} />
         <CharacterCardDropdown />
         <EncounterGeneratorDropdown onGenerateEncounter={onGenerateEncounter} />
         <div className="menu-item" onClick={onCalendarClick}>

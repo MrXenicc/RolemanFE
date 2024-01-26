@@ -30,7 +30,7 @@ const CalendarModal = ({ onClose, selectedDate, onDateChange, events, onSaveEven
       onRequestClose={onClose}
       style={{
         overlay: {
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          backgroundColor: 'none',
         },
         content: {
           top: '50%',
@@ -45,12 +45,12 @@ const CalendarModal = ({ onClose, selectedDate, onDateChange, events, onSaveEven
           background: 'rgba(0, 0, 0, 0.5)',
           color: 'white', 
           borderRadius: '10px',
+          borderColor: 'black',
           textAlign: 'center',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          borderRadius: '10px', 
           padding: '20px',
         },
       }}

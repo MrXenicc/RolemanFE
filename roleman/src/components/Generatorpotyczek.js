@@ -16,20 +16,6 @@ const EncounterGeneratorDropdown = ({ onGenerateEncounter }) => {
   const difficulties = ["EASY", "MEDIUM", "HARD", "DEADLY"];
   const apiUrl = process.env.REACT_APP_ROLEMAN_BE + '/generator/generate';
 
-  // const handleGenerate = (event) => {
-  //   event.preventDefault();
-    // const generatedEncounterData = {
-    //   monsters: [
-    //     { name: 'Goblin', count: 3, imageUrl: 'https://img00.deviantart.net/1c21/i/2014/210/7/2/goblin_by_aaronflorento-d7srkrg.jpg' },
-    //    // { name: 'Dragon', count: 1, imageUrl: 'https://images.ctfassets.net/swt2dsco9mfe/4Dkulb3CgE4D7V3yJid7tP/1a8f93f5df165d60f8233f78d7ab9220/product-hero-starterset.jpg' },
-    //   ],
-    // // // Logika generowania potyczki
-    // // console.log(teamSize, teamLevel, rarity, difficulty);
-//   };
-//   setEncounterData(generatedEncounterData);
-//   setShowEncounterPopup(true); // Pokaż okienko potyczki
-// };
-
 const handleGenerate = (event) => {
   event.preventDefault();
   

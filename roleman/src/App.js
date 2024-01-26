@@ -5,6 +5,8 @@ import RegisterForm from './components/RegisterForm';
 import CalendarModal from './components/CalendarModal';
 //import CreateCharacterForm from './components/CreateCharacterForm';
 import EncounterPopup from './components/EncounterPopup';
+import Campaign from './components/Campaign';
+import CampaignList from './components/CampaignList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './components/Sidebar.css'
@@ -21,7 +23,10 @@ import tlo1 from './tło1.webp';
     const [encounterPopupData, setEncounterPopupData] = useState(null);
     const [backgroundLoaded, setBackgroundLoaded] = useState(false);
     const [logoLoaded, setLogoLoaded] = useState(false);
-
+    const [showCampaignModal, setShowCampaignModal] = useState(false);
+    const [campaignsVisible, setCampaignsVisible] = useState(false); // Dodane
+    const [selectedCampaign, setSelectedCampaign] = useState(null); // Dodane
+    const [campaigns, setCampaigns] = useState([]); // Dodane
 
     
 
@@ -81,6 +86,29 @@ import tlo1 from './tło1.webp';
       setIsEncounterPopupVisible(false);
     };
 
+    const handleNewCampaignClick = () => {
+      setShowCampaignModal(true); // Pokaż modal z formularzem
+    };
+  
+    const handleMyCampaignsClick = () => {
+      setCampaignsVisible(!campaignsVisible); // Przełącz widoczność listy kampanii
+    };
+
+    const handleCampaignsUpdated = (updatedCampaigns) => {
+      setCampaigns(updatedCampaigns);
+    };
+
+    const handleEditCampaign = (campaignId) => {
+      const campaign = campaigns.find(c => c.id === campaignId); // Znajdź kampanię po ID
+      setSelectedCampaign(campaign); // Ustaw wybraną kampanię
+      setShowCampaignModal(true); // Pokaż modal do edycji kampanii
+    };
+
+    const handleCampaignDeleted = () => {
+      setCampaignsVisible(false); // Możesz chcieć chwilowo ukryć listę, jeśli to jest spójne z UX
+      setCampaignsVisible(true); // Potem ponownie wyświetlić zaktualizowaną listę
+    };
+
     return (
       <div className="App" style={{ 
         backgroundImage: backgroundLoaded ? `url(${tlo1})` : 'none', // 'none' to placeholder, możesz użyć innego tła jako fallback
@@ -95,7 +123,13 @@ import tlo1 from './tło1.webp';
          onLoad={() => setBackgroundLoaded(true)}
          style={{ display: 'none' }} // Obraz jest niewidoczny, służy tylko do załadowania tła
         />
-        <Sidebar onLoginClick={() => setShowLogin(true)} onRegisterClick={() => setShowRegister(true)} onCalendarClick={handleCalendarClick} onGenerateEncounter={showEncounterPopup} />
+        <Sidebar onLoginClick={() => setShowLogin(true)} 
+        onRegisterClick={() => setShowRegister(true)} 
+        onCalendarClick={handleCalendarClick} 
+        onGenerateEncounter={showEncounterPopup}
+        onNewCampaignClick={handleNewCampaignClick}
+        onMyCampaignsClick={handleMyCampaignsClick}
+         />
         {showCalendar && (
         <CalendarModal
           onClose={() => setShowCalendar(false)}
@@ -104,6 +138,25 @@ import tlo1 from './tło1.webp';
           events={events}
           onSaveEvent={saveEvent}
           onDeleteEvent={deleteEvent}
+        />
+        )}
+        {campaignsVisible && (
+           <CampaignList 
+           onEditCampaign={handleEditCampaign}
+           onCampaignDeleted={handleCampaignDeleted}
+           onCampaignsUpdated={handleCampaignsUpdated}
+           campaigns={campaigns} // Przekazuje aktualną listę kampanii do CampaignList
+         />
+        )}
+        {showCampaignModal && (
+        <Campaign
+          isOpen={showCampaignModal}
+          onClose={() => {
+            setShowCampaignModal(false);
+            setSelectedCampaign(null); // Resetuj wybraną kampanię po zamknięciu modala
+            handleCampaignsUpdated();
+          }}
+        campaignData={selectedCampaign}
         />
         )}
         {showLogin && <LoginForm onClose={() => setShowLogin(false)} />}
