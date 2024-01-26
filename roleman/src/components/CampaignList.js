@@ -5,22 +5,49 @@ const CampaignList = ({ onEditCampaign, onCampaignDeleted, onCampaignsUpdated })
   const [usernameInput, setUsernameInput] = useState(''); // Stan dla przechowywania wprowadzonej nazwy użytkownika
 
   const fetchCampaigns = () => {
+    const token = localStorage.getItem('token'); // Pobierz token z localStorage
     const urlWithUsername = `${process.env.REACT_APP_ROLEMAN_BE}/campaign/all?username=${encodeURIComponent(usernameInput)}`;
-    fetch(urlWithUsername, { method: 'GET' })
-      .then(response => response.json())
+
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Dodaj nagłówek autoryzacji
+      },
+    };
+
+    fetch(urlWithUsername, requestOptions)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
         setCampaigns(data);
         onCampaignsUpdated(data);
       })
-      .catch(error => console.error('Error fetching campaigns:', error));
+      .catch(error => {
+        console.error('Error fetching campaigns:', error);
+      });
   };
 
   const handleDeleteCampaign = (campaignId) => {
+    const token = localStorage.getItem('token'); // Pobierz token z localStorage
     const urlWithCampaignId = `${process.env.REACT_APP_ROLEMAN_BE}/campaign/${campaignId}`;
-    fetch(urlWithCampaignId, { method: 'DELETE' })
+
+    const requestOptions = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Dodaj nagłówek autoryzacji
+      },
+    };
+
+    fetch(urlWithCampaignId, requestOptions)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Error deleting campaign');
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         return response.json();
       })
@@ -29,7 +56,9 @@ const CampaignList = ({ onEditCampaign, onCampaignDeleted, onCampaignsUpdated })
         setCampaigns(updatedCampaigns);
         onCampaignDeleted();
       })
-      .catch(error => console.error('Error deleting campaign:', error));
+      .catch(error => {
+        console.error('Error deleting campaign:', error);
+      });
   };
 
   const handleUsernameSubmit = (event) => {
