@@ -103,11 +103,11 @@ const CalendarModal = ({ onClose, selectedDate, onDateChange, events, onSaveEven
       <button 
       onClick={onClose}
       style={{
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Zmień na wybrany kolor tła przycisku
-        color: 'white', // Zmień na wybrany kolor tekstu przycisku
-        border: 'none', // Usunięcie obramowania
-        padding: '10px', // Padding dla przycisku
-        margin: '10px', // Margines wokół przycisku
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+        color: 'white', 
+        border: 'none', 
+        padding: '10px', 
+        margin: '10px', 
       }}
       >
       Zamknij

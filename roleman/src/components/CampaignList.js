@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import './CampaignList.css'
 
-const CampaignList = ({ onEditCampaign, onCampaignDeleted, onCampaignsUpdated }) => {
+const CampaignList = ({ onEditCampaign, onCampaignDeleted, onCampaignsUpdated, username, onClose }) => {
   const [campaigns, setCampaigns] = useState([]);
-  const [usernameInput, setUsernameInput] = useState(''); // Stan dla przechowywania wprowadzonej nazwy użytkownika
+  
 
   const fetchCampaigns = () => {
     const token = localStorage.getItem('token'); // Pobierz token z localStorage
-    const urlWithUsername = `${process.env.REACT_APP_ROLEMAN_BE}/campaign/all?username=${encodeURIComponent(usernameInput)}`;
+    const username = localStorage.getItem('username');
+    const urlWithUsername = `${process.env.REACT_APP_ROLEMAN_BE}/campaign/all?username=${encodeURIComponent(username)}`;
 
     const requestOptions = {
       method: 'GET',
@@ -32,26 +34,40 @@ const CampaignList = ({ onEditCampaign, onCampaignDeleted, onCampaignsUpdated })
       });
   };
 
+  useEffect(() => {
+    if (username) {
+      fetchCampaigns();
+    }
+  }, [username]);
+
   const handleDeleteCampaign = (campaignId) => {
     const token = localStorage.getItem('token'); // Pobierz token z localStorage
-    const urlWithCampaignId = `${process.env.REACT_APP_ROLEMAN_BE}/campaign/${campaignId}`;
+    const username = localStorage.getItem('username');
+    
+    if (!token || !username) {
+      console.error('No token or username found, please log in.');
+      return; // Jeśli nie ma tokena lub nazwy użytkownika, nie kontynuuj dalej.
+    }
 
+    const url = `${process.env.REACT_APP_ROLEMAN_BE}/campaign?campaignId=${encodeURIComponent(campaignId)}&username=${encodeURIComponent(username)}`;
+  
     const requestOptions = {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}` // Dodaj nagłówek autoryzacji
+        'Authorization': `Bearer ${token}` 
       },
     };
-
-    fetch(urlWithCampaignId, requestOptions)
+  
+    fetch(url, requestOptions)
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return response.json();
+        return response.text(); // Ponieważ odpowiedź może nie być w formacie JSON
       })
-      .then(() => {
+      .then(text => {
+        console.log('Delete response:', text); // Może zwrócić pusty string jeśli nie ma treści
         const updatedCampaigns = campaigns.filter(campaign => campaign.id !== campaignId);
         setCampaigns(updatedCampaigns);
         onCampaignDeleted();
@@ -61,34 +77,18 @@ const CampaignList = ({ onEditCampaign, onCampaignDeleted, onCampaignsUpdated })
       });
   };
 
-  const handleUsernameSubmit = (event) => {
-    event.preventDefault();
-    fetchCampaigns();
-  };
-
   return (
-    <div>
-      <form onSubmit={handleUsernameSubmit}>
-        <label>
-          Nazwa użytkownika:
-          <input
-            type="text"
-            value={usernameInput}
-            onChange={e => setUsernameInput(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Pobierz kampanie</button>
-      </form>
+    <div className="campaign-list-container"> 
       {campaigns.map(campaign => (
-        <div key={campaign.id}>
-          <h3>{campaign.campaignName}</h3>
-          <p>Mistrz Gry: {campaign.gameMasterUsername}</p>
-          <p>Gracze: {campaign.playersUsernames.join(', ')}</p>
-          <button onClick={() => onEditCampaign(campaign.id)}>Edytuj</button>
-          <button onClick={() => handleDeleteCampaign(campaign.id)}>Usuń</button>
+        <div key={campaign.id} className="campaign-item"> 
+          <h3 className="campaign-header">{campaign.campaignName}</h3> 
+          <p className="campaign-info">Mistrz Gry: {campaign.gameMasterUsername}</p> 
+          <p className="campaign-info">Gracze: {campaign.playersUsernames.join(', ')}</p> 
+          <button onClick={() => onEditCampaign(campaign.id)} className="campaign-button">Edytuj</button> 
+          <button onClick={() => handleDeleteCampaign(campaign.id)} className="campaign-button">Usuń</button> 
         </div>
       ))}
+      <button onClick={onClose} className="close-button">Zamknij</button>
     </div>
   );
 };

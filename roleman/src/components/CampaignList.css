@@ -1,0 +1,53 @@
+.campaign-list-container {
+    position: fixed; /* Pozycjonowanie względem okna przeglądarki */
+    top: 50%; /* Środek ekranu w pionie */
+    left: 50%; /* Środek ekranu w poziomie */
+    transform: translate(-50%, -50%); /* Przesunięcie o połowę szerokości i wysokości elementu */
+    width: 50%; /* Szerokość listy kampanii */
+    max-width: 200px; /* Maksymalna szerokość listy */
+    background-color: rgba(0, 0, 0, 0.5); /* Tło listy */
+    padding: 20px; /* Wewnętrzny odstęp */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Cień dookoła listy */
+    border-radius: 8px; /* Zaokrąglenie rogów */
+    z-index: 1000; /* Upewniamy się, że lista jest na wierzchu */
+    overflow-y: auto;
+    max-height: 80vh;
+    scrollbar-width: thin; /* "thin" dla cieńszych pasków przewijania */
+    scrollbar-color: #555 #000;
+  }
+  
+  .campaign-item {
+    padding: 10px 0; /* Odstęp wewnątrz elementu kampanii */
+    margin-bottom: 10px; /* Odstęp między kampaniami */
+  }
+  
+  .campaign-header {
+    font-size: 1.2em; /* Wielkość czcionki nazwy kampanii */
+    color: white; /* Kolor czcionki */
+    margin-bottom: 5px; /* Odstęp pod nazwą kampanii */
+  }
+  
+  .campaign-info {
+    font-size: 0.9em; /* Wielkość czcionki dla informacji o kampanii */
+    color: white; /* Kolor czcionki */
+  }
+  
+  /* Dodatkowe style dla przycisków, jeśli potrzebne */
+  .campaign-button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none; 
+    padding: 5px; 
+    margin: 5px; 
+     /* Odstęp między przyciskami */
+    /* Tutaj możesz dodać więcej stylów dla przycisków */
+  }
+
+  .close-button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none; 
+    padding: 10px; 
+    margin: 10px; 
+  }
+  

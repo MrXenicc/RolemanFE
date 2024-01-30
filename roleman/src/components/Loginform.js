@@ -31,6 +31,7 @@ const LoginForm = ({ onClose }) => {
       const token = authToken.split(' ')[1]; // Usuń 'Bearer' z ciągu
       // Zapisz token w localStorage
       localStorage.setItem('token', token);
+      localStorage.setItem('username', username);
       console.log('Login successful: Token saved');
       onClose(); // Zamknij formularz po zalogowaniu
     } else {

@@ -27,6 +27,8 @@ import tlo1 from './tło1.webp';
     const [campaignsVisible, setCampaignsVisible] = useState(false); // Dodane
     const [selectedCampaign, setSelectedCampaign] = useState(null); // Dodane
     const [campaigns, setCampaigns] = useState([]); // Dodane
+    
+    
 
     
 
@@ -91,8 +93,14 @@ import tlo1 from './tło1.webp';
     };
   
     const handleMyCampaignsClick = () => {
+      const username = localStorage.getItem('username'); // Pobierz nazwę użytkownika z localStorage
+    if (username) {
       setCampaignsVisible(!campaignsVisible); // Przełącz widoczność listy kampanii
-    };
+    } else {
+      // Możesz dodać tutaj obsługę logiki, jeśli username nie jest dostępne
+      console.log('No username found. Please log in.');
+    }
+  };
 
     const handleCampaignsUpdated = (updatedCampaigns) => {
       setCampaigns(updatedCampaigns);
@@ -146,6 +154,8 @@ import tlo1 from './tło1.webp';
            onCampaignDeleted={handleCampaignDeleted}
            onCampaignsUpdated={handleCampaignsUpdated}
            campaigns={campaigns} // Przekazuje aktualną listę kampanii do CampaignList
+           username={localStorage.getItem('username')} // Przekazuje nazwę użytkownika do CampaignList
+           onClose={() => setCampaignsVisible(false)}
          />
         )}
         {showCampaignModal && (
