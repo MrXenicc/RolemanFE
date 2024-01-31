@@ -1,0 +1,85 @@
+/* Map.css */
+
+/* Style for the map container */
+.map-container {
+    position: fixed; /* Fixed position to cover the whole screen */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    z-index: 10; /* Make sure it's above other content */
+    background: url('mapa.jpg') no-repeat center center; /* Add your image here */
+    background-size: cover; /* Cover the entire container without stretching */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-image {
+    width: 100%; /* Ensure the map image fills the container */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 1; /* Below the grid */
+}
+
+.grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(50, 1fr); /* Create a 50x50 grid */
+    grid-template-rows: repeat(50, 1fr);
+    z-index: 2; /* Above the map image */
+}
+
+:root {
+    --grid-size: 50px; /* Domyślna wartość, zostanie nadpisana przez JavaScript */
+}
+
+.grid-cell {
+    width: var(--grid-size);
+    height: var(--grid-size);
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+/* Ensure the last row and column don't have a border on the outside */
+.grid-overlay :nth-child(50n) {
+    border-right: none;
+}
+
+.grid-overlay :nth-last-child(-n+50) {
+    border-bottom: none;
+}
+
+.character-dot {
+    width: 20px; /* Width of the dot */
+    height: 20px; /* Height of the dot */
+    background-color: black; /* Black color for the character dot */
+    border-radius: 50%; /* Circle shape */
+    position: absolute; /* Needed for Draggable to work */
+    z-index: 3; /* Above the grid */
+}
+
+/* Style for the character dot when dragging */
+.character-dot:active {
+    cursor: grabbing;
+}
+
+/* Close button style */
+.close-map-button {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    padding: 10px;
+    background-color: black; /* Kolor tła przycisku */
+    color: white; /* Kolor tekstu */
+    border: none; /* Brak obramowania */
+    cursor: pointer; /* Kursor wskazujący */
+    z-index: 4; /* Above all other content */
+}
+
+.close-map-button:hover {
+    background-color: #320000FF; /* Darken color on hover */
+}

@@ -112,6 +112,7 @@ const Campaign = ({ isOpen, onClose, campaignData  }) => {
         flexDirection: 'column',
         alignItems: 'center',
         padding: '20px',
+        justifycontent: 'space-between',
       },
     }}
     >

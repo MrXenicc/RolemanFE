@@ -6,33 +6,17 @@ import './Kartapostaci.css';
 
 Modal.setAppElement('#root');
 
-const CalendarModal = ({ onClose, selectedDate, onDateChange, events, onSaveEvent, onDeleteEvent, onCampaignsUpdated, campaignId }) => {
+const CalendarModal = ({ onClose, selectedDate, onDateChange, events, onSaveEvent, onDeleteEvent, campaignId }) => {
     const [eventText, setEventText] = useState('');
-    const [weather, setWeather] = useState(null);
-    const username = localStorage.getItem('username');
     const dateString = selectedDate.toISOString().slice(0, 10);
+    const [weather, setWeather] = useState(null);
+    const [isWeatherRequested, setIsWeatherRequested] = useState(false);
+    const username = localStorage.getItem('username');
   
-    const fetchWeather = (date) => {
-      // Tutaj wstaw URL do API pogodowego, z odpowiednimi parametrami
-      const weatherApiUrl = `${process.env.REACT_APP_ROLEMAN_BE}/weather?campaignId=${encodeURIComponent(campaignId)}&username=${encodeURIComponent(username)}`;
-
-      fetch(weatherApiUrl)
-          .then(response => response.json())
-          .then(data => {
-              // Przykład, jak można by przetworzyć dane o pogodzie
-              const weatherData = data.forecast.forecastday[0].day.condition.text;
-              setWeather(weatherData);
-          })
-          .catch(error => {
-              console.error('Error fetching weather:', error);
-          });
-  };
-
-  const handleDateSelect = (date) => {
+    const handleDateSelect = (date) => {
       onDateChange(date);
       setEventText(events[date.toISOString().slice(0, 10)] || '');
-      fetchWeather('CAMPAIGN_ID', date.toISOString().slice(0, 10)); // Pobierz pogodę dla wybranej daty
-  };
+    };
   
     const handleSaveEvent = () => {
         onSaveEvent(selectedDate, eventText);
@@ -42,6 +26,43 @@ const CalendarModal = ({ onClose, selectedDate, onDateChange, events, onSaveEven
     const handleDeleteEvent = (eventIndex) => {
         onDeleteEvent(selectedDate, eventIndex);
     };
+
+
+  const fetchWeather = () => {
+      const weatherApiUrl = `${process.env.REACT_APP_ROLEMAN_BE}/weather?campaignId=${encodeURIComponent(campaignId)}&username=${encodeURIComponent(username)}`; // Adres URL do twojego backendu
+      setIsWeatherRequested(true); 
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('Error: No token found');
+        return;
+      }
+    fetch(weatherApiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, 
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (Array.isArray(data.message)) {
+        setWeather(data.message);
+      } else {
+        // Jeśli data.message nie jest tablicą, ale chcesz wyświetlić komunikat jako element listy
+        setWeather([data.message]);
+      }
+      console.log(data);// Wyloguj dane, aby zobaczyć, co otrzymujesz
+      setIsWeatherRequested(true); 
+    })
+    .catch(error => {
+      console.error('Error fetching weather:', error);
+    });
+  };
 
   return (
     <Modal
@@ -118,12 +139,25 @@ const CalendarModal = ({ onClose, selectedDate, onDateChange, events, onSaveEven
         </li>
       ))}
     </ul>
-    {weather && (
-                    <div className="weather-info">
-                        <p>Pogoda na ten dzień: {weather}</p>
-                    </div>
-                )}
       </div>
+      <button onClick={fetchWeather}
+      style={{
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+        color: 'white', 
+        border: 'none', 
+        padding: '10px', 
+        margin: '10px', 
+      }}
+      >
+      Generuj Pogodę
+      </button>
+      {
+        isWeatherRequested && weather && (
+          <div style={{ color: 'white', marginTop: '20px' }}>
+            Dzisiejsza pogoda: {weather.map((item, index) => <div key={index}>{item}</div>)}
+          </div>
+        )
+      }
       <button 
       onClick={onClose}
       style={{

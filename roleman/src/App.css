@@ -47,6 +47,10 @@
   background: rgba(0, 0, 0, 0.5);  /* Kolor tła dla formularza */
   padding: 20px; /* Padding wewnątrz formularza */
   border: 2px solid black; 
+  overflow-y: auto;
+  max-height: 80vh;
+  scrollbar-width: thin; /* "thin" dla cieńszych pasków przewijania */
+  scrollbar-color: #555 #000;
 }
 
 .form-container label {

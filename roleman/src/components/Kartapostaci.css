@@ -60,5 +60,7 @@
     color: red; /* Ciemniejszy kolor przy najechaniu */
   }
 
-  
+  .weather-info {
+    display: block;
+  }
   

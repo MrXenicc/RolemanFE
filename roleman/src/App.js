@@ -7,6 +7,7 @@ import CalendarModal from './components/CalendarModal';
 import EncounterPopup from './components/EncounterPopup';
 import Campaign from './components/Campaign';
 import CampaignList from './components/CampaignList';
+import Map from './components/Map';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './components/Sidebar.css'
@@ -28,9 +29,7 @@ import tlo1 from './tło1.webp';
     const [selectedCampaign, setSelectedCampaign] = useState(null); // Dodane
     const [campaigns, setCampaigns] = useState([]); // Dodane
     const [selectedCampaignId, setSelectedCampaignId] = useState(null);
-    
-    
-
+    const [isMapVisible, setIsMapVisible] = useState(false);
     
 
     // const handleLoginClick = () => {
@@ -126,6 +125,37 @@ import tlo1 from './tło1.webp';
       setCampaignsVisible(true); // Potem ponownie wyświetlić zaktualizowaną listę
     };
 
+    const handleMapOpen = () => {
+      setIsMapVisible(true);
+    };
+
+    const handleMapClose = () => {
+      setIsMapVisible(false);
+    };
+
+    const updateCharacterLocation = (campaignId, x, y) => {
+      // Update the character's location in the database using the PUT / endpoint
+      fetch('/map-controller', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          campaignId,
+          currentLocation: { x, y }
+        })
+      })
+          .then(response => {
+            if (response.ok) {
+              console.log('Character location updated successfully');
+            } else {
+              console.error('Failed to update character location');
+            }
+          })
+          .catch(error => console.error('Error updating character location:', error));
+    };
+
+
     return (
       <div className="App" style={{ 
         backgroundImage: backgroundLoaded ? `url(${tlo1})` : 'none', // 'none' to placeholder, możesz użyć innego tła jako fallback
@@ -146,6 +176,8 @@ import tlo1 from './tło1.webp';
         onGenerateEncounter={showEncounterPopup}
         onNewCampaignClick={handleNewCampaignClick}
         onMyCampaignsClick={handleMyCampaignsClick}
+        onMapOpen={handleMapOpen}
+        campaignId={selectedCampaignId}
          />
         {showCalendar && (
         <CalendarModal
@@ -182,6 +214,15 @@ import tlo1 from './tło1.webp';
         campaignData={selectedCampaign}
         />
         )}
+        {isMapVisible && (
+            <Map
+                isVisible={isMapVisible}
+                onClose={handleMapClose}
+                campaignId={selectedCampaignId} // Assuming this is the current campaign ID
+                updateCharacterLocation={updateCharacterLocation}
+            />
+        )}
+
         {showLogin && <LoginForm onClose={() => setShowLogin(false)} />}
         {showRegister && <RegisterForm onClose={() => setShowRegister(false)} />}
         {isEncounterPopupVisible && (

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import './Kartapostaci.css';
 import CharacterList from './CharacterList';
-import CharacterDetails from './CharacterDetails';
 import CreateCharacterForm from './CreateCharacterForm'
 
-const CharacterCardDropdown = () => {
+const CharacterCardDropdown = ({ campaignId, setCharacters }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [showCharacterList, setShowCharacterList] = useState(false);
   const [selectedCharacterId, setSelectedCharacterId] = useState(null);
@@ -20,9 +19,9 @@ const CharacterCardDropdown = () => {
     setShowCharacterList(false); // Zamknij listę postaci
   };
 
-  const saveCharacter = (characterData) => {
-    console.log('Zapisz postać:', characterData);
-    // Tutaj możesz wysłać dane do API lub dodać do stanu aplikacji
+  const saveCharacter = (newCharacter) => {
+    // aktualizuje stan z nową postacią
+    setCharacters(prevCharacters => [...prevCharacters, newCharacter]);
   };
   
 
@@ -40,19 +39,15 @@ const CharacterCardDropdown = () => {
       {showCharacterList && (
         <CharacterList 
           onCharacterSelect={handleCharacterSelect}
-          onClose={() => setShowCharacterList(false)} 
-        />
-      )}
-      {selectedCharacterId && (
-        <CharacterDetails 
-          characterId={selectedCharacterId} 
-          onClose={() => setSelectedCharacterId(null)}
+          onClose={() => setShowCharacterList(false)}
+          campaignId={campaignId} 
         />
       )}
       {showCreateCharacterForm && (
       <CreateCharacterForm
       onSave={saveCharacter}
       onClose={() => setShowCreateCharacterForm(false)}
+      campaignId={campaignId}
       />
       )}
     </>

@@ -1,18 +1,61 @@
-import React, { useState } from 'react';
-import './CharacterList.css'; // Stwórz i dostosuj CSS podobnie do LoginForm.css
+import React, { useState, useEffect } from 'react';
 
-const CharacterList = ({ onCharacterSelect, onClose }) => {
-  const [characters, setCharacters] = useState([
-    // Tutaj przykładowe postacie, w przyszłości pobierane z API
-    { id: 1, name: 'Postać 1' },
-    { id: 2, name: 'Postać 2' },
-    // itd.
-  ]);
+const CharacterList = ({ onCharacterSelect, onClose, username, campaignId }) => {
+  const [characters, setCharacters] = useState([]);
+  username = localStorage.getItem('username');
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('Error: No token found');
+      return;
+    }
+
+    const apiUrl = `${process.env.REACT_APP_ROLEMAN_BE}/characters?campaignId=${encodeURIComponent(campaignId)}&username=${encodeURIComponent(username)}`;
+
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, 
+      }
+    };
+
+    fetch(apiUrl, requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      setCharacters(data);
+    })
+    .catch(error => {
+      console.error('Błąd podczas pobierania postaci:', error);
+    });
+  }, [username, campaignId]);
 
   const handleDelete = (id) => {
-    // Logika usuwania postaci
-    setCharacters(characters.filter(character => character.id !== id));
+  // Logika usuwania postaci z serwera...
+  const token = localStorage.getItem('token');
+  const deleteUrl = `${process.env.REACT_APP_ROLEMAN_BE}/character/${id}`;
+
+  const requestOptions = {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`, 
+    }
   };
+
+  fetch(deleteUrl, requestOptions)
+  .then(response => {
+    if(response.ok) {
+      // Usuń postać z lokalnego stanu po pomyślnym usunięciu z serwera
+      setCharacters(characters.filter(character => character.id !== id));
+    } else {
+      console.error('Błąd podczas usuwania postaci');
+    }
+  })
+  .catch(error => {
+    console.error('Błąd podczas wywoływania API:', error);
+  });
+};
 
   return (
     <div className="form-container">

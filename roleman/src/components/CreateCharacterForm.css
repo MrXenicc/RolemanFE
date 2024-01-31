@@ -1,31 +1,43 @@
 .character-form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Wyśrodkowanie elementów w poziomie */
-    justify-content: center; /* Wyśrodkowanie elementów w pionie */
-    /* ... inne style */
-  }
-  
-  .character-form-container label {
-    margin: 10px 0; /* Dodaje margines na górze i na dole dla każdej etykiety */
-    width: 100%; /* Opcjonalnie, aby etykieta rozciągała się na całą szerokość */
-  }
-  
-  .character-form-container input, .character-form-container select {
-    width: 90%; /* Ustaw szerokość inputów i select */
-    margin: 5px 0; /* Dodaje margines na górze i na dole dla każdego inputu */
-  }
-  
-  .buttons {
-    display: flex;
-    justify-content: space-evenly; /* Rozłoży przyciski równomiernie */
-    width: 100%; /* Opcjonalnie, aby kontener przycisków rozciągał się na całą szerokość */
-    padding: 10px;
-    flex-direction: column;
-    align-items: flex-start;
-    align-self: center;
-  }
-  
-  .button {
-    margin-top: 10px; /* Dodaje margines na górze dla przycisku */
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border: 2px solid black;
+}
+
+.character-form-container label {
+  margin-bottom: 5px;
+}
+
+.character-form-container input {
+  margin-bottom: 10px;
+  width: 50%;
+}
+
+.character-form-container button {
+  align-items: flex-start;
+  align-self: right;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  margin: 10px;
+  display: block;
+  width: 100%;
+}
+
+.character-form-group {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between; /* Przesunięcie elementów w prawą stronę */
+  align-self: center;
+}
