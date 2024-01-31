@@ -4,7 +4,7 @@
     left: 50%; /* Środek ekranu w poziomie */
     transform: translate(-50%, -50%); /* Przesunięcie o połowę szerokości i wysokości elementu */
     width: 50%; /* Szerokość listy kampanii */
-    max-width: 200px; /* Maksymalna szerokość listy */
+    max-width: 300px; /* Maksymalna szerokość listy */
     background-color: rgba(0, 0, 0, 0.5); /* Tło listy */
     padding: 20px; /* Wewnętrzny odstęp */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Cień dookoła listy */
@@ -51,3 +51,6 @@
     margin: 10px; 
   }
   
+  .campaign-header.selected {
+    color: red;
+  }

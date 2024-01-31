@@ -27,6 +27,7 @@ import tlo1 from './tło1.webp';
     const [campaignsVisible, setCampaignsVisible] = useState(false); // Dodane
     const [selectedCampaign, setSelectedCampaign] = useState(null); // Dodane
     const [campaigns, setCampaigns] = useState([]); // Dodane
+    const [selectedCampaignId, setSelectedCampaignId] = useState(null);
     
     
 
@@ -102,14 +103,22 @@ import tlo1 from './tło1.webp';
     }
   };
 
+    const handleSelectCampaign = (campaignId) => {
+      setSelectedCampaignId(campaignId);
+    };
+
     const handleCampaignsUpdated = (updatedCampaigns) => {
       setCampaigns(updatedCampaigns);
     };
 
     const handleEditCampaign = (campaignId) => {
-      const campaign = campaigns.find(c => c.id === campaignId); // Znajdź kampanię po ID
-      setSelectedCampaign(campaign); // Ustaw wybraną kampanię
-      setShowCampaignModal(true); // Pokaż modal do edycji kampanii
+      const campaignToEdit = campaigns.find(c => c.id === campaignId);
+      if (campaignToEdit) {
+        setSelectedCampaign(campaignToEdit);
+        setShowCampaignModal(true);
+      } else {
+        console.error('Campaign not found');
+      }
     };
 
     const handleCampaignDeleted = () => {
@@ -146,6 +155,8 @@ import tlo1 from './tło1.webp';
           events={events}
           onSaveEvent={saveEvent}
           onDeleteEvent={deleteEvent}
+          onCampaignsUpdated={handleCampaignsUpdated}
+          campaignId={selectedCampaignId}
         />
         )}
         {campaignsVisible && (
@@ -155,6 +166,8 @@ import tlo1 from './tło1.webp';
            onCampaignsUpdated={handleCampaignsUpdated}
            campaigns={campaigns} // Przekazuje aktualną listę kampanii do CampaignList
            username={localStorage.getItem('username')} // Przekazuje nazwę użytkownika do CampaignList
+           selectedCampaignId={selectedCampaignId}
+           onSelectCampaign={handleSelectCampaign}
            onClose={() => setCampaignsVisible(false)}
          />
         )}

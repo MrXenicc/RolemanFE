@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './CampaignList.css'
 
-const CampaignList = ({ onEditCampaign, onCampaignDeleted, onCampaignsUpdated, username, onClose }) => {
+const CampaignList = ({ onEditCampaign, onCampaignDeleted, onCampaignsUpdated, username, onClose, onSelectCampaign, selectedCampaignId }) => {
   const [campaigns, setCampaigns] = useState([]);
   
 
@@ -77,13 +77,20 @@ const CampaignList = ({ onEditCampaign, onCampaignDeleted, onCampaignsUpdated, u
       });
   };
 
+  const handleSelectCampaign = (campaignId) => {
+    onSelectCampaign(campaignId);
+  };
+
   return (
     <div className="campaign-list-container"> 
       {campaigns.map(campaign => (
-        <div key={campaign.id} className="campaign-item"> 
-          <h3 className="campaign-header">{campaign.campaignName}</h3> 
+        <div key={campaign.id} className={`campaign-item ${selectedCampaignId === campaign.id ? 'selected' : ''}`}>
+          <h3 className={`campaign-header ${selectedCampaignId === campaign.id ? 'selected' : ''}`}>
+          {campaign.campaignName}
+          </h3>
           <p className="campaign-info">Mistrz Gry: {campaign.gameMasterUsername}</p> 
-          <p className="campaign-info">Gracze: {campaign.playersUsernames.join(', ')}</p> 
+          <p className="campaign-info">Gracze: {campaign.playersUsernames.join(', ')}</p>
+          <button onClick={() => handleSelectCampaign(campaign.id)} className="campaign-button">Wybierz</button> 
           <button onClick={() => onEditCampaign(campaign.id)} className="campaign-button">Edytuj</button> 
           <button onClick={() => handleDeleteCampaign(campaign.id)} className="campaign-button">Usuń</button> 
         </div>

@@ -6,14 +6,33 @@ import './Kartapostaci.css';
 
 Modal.setAppElement('#root');
 
-const CalendarModal = ({ onClose, selectedDate, onDateChange, events, onSaveEvent, onDeleteEvent }) => {
+const CalendarModal = ({ onClose, selectedDate, onDateChange, events, onSaveEvent, onDeleteEvent, onCampaignsUpdated, campaignId }) => {
     const [eventText, setEventText] = useState('');
+    const [weather, setWeather] = useState(null);
+    const username = localStorage.getItem('username');
     const dateString = selectedDate.toISOString().slice(0, 10);
   
-    const handleDateSelect = (date) => {
+    const fetchWeather = (date) => {
+      // Tutaj wstaw URL do API pogodowego, z odpowiednimi parametrami
+      const weatherApiUrl = `${process.env.REACT_APP_ROLEMAN_BE}/weather?campaignId=${encodeURIComponent(campaignId)}&username=${encodeURIComponent(username)}`;
+
+      fetch(weatherApiUrl)
+          .then(response => response.json())
+          .then(data => {
+              // Przykład, jak można by przetworzyć dane o pogodzie
+              const weatherData = data.forecast.forecastday[0].day.condition.text;
+              setWeather(weatherData);
+          })
+          .catch(error => {
+              console.error('Error fetching weather:', error);
+          });
+  };
+
+  const handleDateSelect = (date) => {
       onDateChange(date);
       setEventText(events[date.toISOString().slice(0, 10)] || '');
-    };
+      fetchWeather('CAMPAIGN_ID', date.toISOString().slice(0, 10)); // Pobierz pogodę dla wybranej daty
+  };
   
     const handleSaveEvent = () => {
         onSaveEvent(selectedDate, eventText);
@@ -99,6 +118,11 @@ const CalendarModal = ({ onClose, selectedDate, onDateChange, events, onSaveEven
         </li>
       ))}
     </ul>
+    {weather && (
+                    <div className="weather-info">
+                        <p>Pogoda na ten dzień: {weather}</p>
+                    </div>
+                )}
       </div>
       <button 
       onClick={onClose}
